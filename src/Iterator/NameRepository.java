@@ -5,10 +5,11 @@ public class NameRepository {
 	static String[] names = new String[] {"A","B","C","D"};
 	
 	
-	public static Iterator getIterator() {
+	public  Iterator getIterator() {
 		return new NameIterator();
 	}
-	private static class NameIterator implements Iterator{
+	
+	private  class NameIterator implements Iterator{
 
 		private int position;
 		@Override
@@ -21,7 +22,7 @@ public class NameRepository {
 		@Override
 		public Object next() {
 			if(this.hasNext())
-			return names[position++];
+				return names[position++];
 			return null;
 			
 		}
