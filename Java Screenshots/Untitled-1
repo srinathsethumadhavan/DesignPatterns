@@ -1,0 +1,49 @@
+
+
+interface PaymentInterface{
+
+   
+    boolean makePayment();
+}
+
+
+class GooglePay implements PaymentInterface{
+
+    public boolean isValid(){
+        return str.equals("GooglePay");
+    }
+    public boolean makePayment(){
+
+    }
+
+}
+
+class PhonePe implements PaymentInterface{
+ public boolean makePayment(){
+        return str.equals("PhonePe");
+    }
+}
+
+
+
+class PaymentExecutor{
+
+List<PaymentInterface> PaymentTypes ;
+
+PaymentExecutor(List<PaymentInterface> PaymentTypes){
+    this.PaymentTypes = PaymentTypes;
+}
+
+    public boolean initiatePayment(PaymentInfo paymentInfo){
+        for(PaymentInterface paymentType : PaymentTypes){
+            if(paymentType.isValid(paymentInfo.getType())){
+                return paymentType.makePayment(paymentInfo);
+            }
+    }
+    }
+    
+}
+
+
+
+[GooglePay,PhonePe,UPI,Paytm]

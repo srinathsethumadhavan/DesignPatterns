@@ -1,0 +1,40 @@
+
+interface Internet{
+
+ connectTo(URL url);
+
+ 
+}
+
+
+class InternetServer implements Internet{
+
+    connectTo(URL url){
+
+    }
+}
+
+
+class ProxyServer implements Inernet{
+
+   
+    private Internet internet = new RealInternet();
+    private static List<String> bannedSites;
+      
+    static
+    {
+        bannedSites = new ArrayList<String>();
+        bannedSites.add("abc.com");
+        bannedSites.add("def.com");
+        bannedSites.add("ijk.com");
+        bannedSites.add("lnm.com");
+    }
+
+    public void connectTo(URL url){
+
+        if(bannedSites.contains(url)){
+            throw new Exception("the site is blocked");
+        }
+        internet.connectTo(url);
+    }
+}
