@@ -1,0 +1,98 @@
+class Solution{
+    static int matrixMultiplication(int N, int arr[])
+    {
+        
+        int n = N;
+        
+        int[][] dp = new int[n][n];
+        
+        for(int i=0;i<n-1;i++){
+            dp[i][i+1]=0;
+        }
+        
+        
+        for(int gap = 2;gap<n;gap++){
+            for(int i=0;i+gap<n;i++){
+                int j=gap+i;
+                dp[i][j]=Integer.MAX_VALUE;
+                for(int k=i+1;k<j;k++)
+                    dp[i][j]=Math.min(dp[i][j],dp[i][k]+dp[k][j]+arr[i]*arr[k]*arr[j]);
+            }
+        }
+        
+        return dp[0][n-1];
+    }
+}
+
+
+Maximum sum subsequecne with no 3 adjancent elements
+In general,
+// We have three cases
+// 1) Exclude arr[i],  i.e.,  sum[i] = sum[i-1]
+// 2) Exclude arr[i-1], i.e., sum[i] = sum[i-2] + arr[i]
+// 3) Exclude arr[i-2], i.e., sum[i-3] + arr[i] + arr[i-1] 
+sum[i] = max(sum[i-1], sum[i-2] + arr[i],
+             sum[i-3] + arr[i] + arr[i-1])
+
+
+
+
+
+
+
+class Solution 
+{ 
+    //Function to return max value that can be put in knapsack of capacity W.
+    static int knapSack(int w, int wt[], int val[], int n) 
+    { 
+      
+        
+         int[][] dp = new int[n+1][w+1];
+         
+         for(int i=1;i<=n;i++){ //elements
+             for(int j=1;j<=w;j++){//capacity or weight
+                 
+                 if(wt[i-1]<=j){
+                     int pick = val[i-1]+dp[i-1][j-wt[i-1]]; //pick
+                     int leave = dp[i-1][j]; //leave
+                     dp[i][j]=Math.max(pick,leave);
+                 }else{
+                     dp[i][j]=dp[i-1][j]; //leave
+                 }
+             }
+         }
+         
+         return dp[n][w]; 
+    } 
+}
+
+
+
+private int maximumSubArraySumLessThanEqualToK(int[] c,int k){
+        TreeSet<Integer>ts= new TreeSet<>();
+        ts.add(0);
+        int res=Integer.MIN_VALUE;
+        int prefix=0;
+        for(int i=0;i<c.length;i++)
+        {
+         prefix+=c[i];
+            Integer target= ts.ceiling(prefix-k);
+            if(target!=null)
+                res=Math.max(res,prefix-target);
+            ts.add(prefix);
+        }
+        return res;
+    }
+
+
+
+    int j = 0, temp;
+		for (int i = 0; i < n; i++) {
+			if (arr[i] %2==0) {
+					temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+              j++;
+				}
+				
+			}
